@@ -3,7 +3,10 @@ const volleyball = require('volleyball');
 const bodyParser = require('body-parser');
 const path = require('path');
 const models = require('./models')
-app = new Express();
+
+const APIrouter = require('./routes/api')
+
+const app = new Express();
 
 app.listen(3000, function() {
   console.log("listening on port 3000");
@@ -16,6 +19,8 @@ app.use(Express.static(path.join(__dirname, '..', 'public')));
 app.get('/', function(req, res, next) {
   res.redirect('/error.html');
 })
+
+app.use('/api', APIrouter)
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
