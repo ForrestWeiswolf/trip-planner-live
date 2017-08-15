@@ -6931,6 +6931,9 @@ h3 {
     width: 20px;
     float: right; }
 
+ul {
+  list-style-type: none; }
+
 #day-title {
   display: inline-block;
   padding: 5px;
