@@ -577,53 +577,21 @@ function populate(elementID, attractions) {
   })
 }
 
-document.getElementById('hotels-add').addEventListener('click',function(){
-  var hotelID = document.getElementById('hotels-choices');
-  var selectedOption = hotelID.options[hotelID.selectedIndex].value;
-  
-  var listElement = document.getElementById('hotels-list');
-  var newItem = document.createElement('li');
-  
-  var newButton = document.createElement('button');
-  newButton.classList.add('btn-danger','btn-circle','pull-right');
-  newButton.setAttribute('id','hotels-remove');
-  newButton.append('x');
+["hotels", "restaurants", "activities"].map((attraction) => {
+    document.getElementById(attraction+'-add').addEventListener('click',function(){
+    var attractionID = document.getElementById(attraction+'-choices');
+    var selectedOption = attractionID.options[attractionID.selectedIndex].value;
+    var listElement = document.getElementById(attraction+'-list');
+    var newItem = document.createElement('li');
+    
+    var newButton = document.createElement('button');
+    newButton.classList.add('btn-danger','btn-circle','pull-right');
+    newButton.append('x');
 
-  newItem.append(selectedOption);
-  listElement.append(newItem);
-  listElement.append(newButton);
-  
-})
-
-document.getElementById('restaurants-add').addEventListener('click',function(){
-  var restaurantID = document.getElementById('restaurants-choices');
-  var selectedOption = restaurantID.options[restaurantID.selectedIndex].value;
-  var listElement = document.getElementById('restaurants-list');
-  var newItem = document.createElement('li');
-  
-  var newButton = document.createElement('button');
-  newButton.classList.add('btn-danger','btn-circle','pull-right');
-  newButton.append('x');
-
-  newItem.append(selectedOption);
-  listElement.append(newItem);
-  listElement.append(newButton);
-
-})
-
-document.getElementById('activities-add').addEventListener('click',function(){
-  var activityID = document.getElementById('activities-choices');
-  var selectedOption = activityID.options[activityID.selectedIndex].value;
-  var listElement = document.getElementById('activities-list');
-  var newItem = document.createElement('li');
-
-  var newButton = document.createElement('button');
-  newButton.classList.add('btn-danger','btn-circle','pull-right');
-  newButton.append('x');
-
-  newItem.append(selectedOption);
-  listElement.append(newItem);
-  listElement.append(newButton);
+    newItem.append(selectedOption);
+    listElement.append(newItem);
+    listElement.append(newButton);
+  })
 })
 
 document.getElementById('itinerary').addEventListener('click',function(button){
@@ -631,14 +599,6 @@ document.getElementById('itinerary').addEventListener('click',function(button){
   console.log(parent);
   parent.parentNode.removeChild(parent);
 })
-
-
-
-
-
-
-// document.getElementById('restaurants-add').addEventListener('click',console.log('hotels'))
-// document.getElementById('activities-add').addEventListener('click',console.log('hotels'))
 
 
 
