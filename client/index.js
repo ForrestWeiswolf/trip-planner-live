@@ -14,3 +14,28 @@ const map = new mapboxgl.Map({
   bearing: 20,
   style: "mapbox://styles/mapbox/streets-v10"
 });
+
+
+/*
+  * Fetch data from API
+  */
+
+fetch('/api')
+.then(result => result.json())
+.then(function(data) {
+  populate('hotels-choices', data[0])
+  populate('restaurants-choices', data[1])
+  populate('activities-choices', data[2])
+})
+
+function populate(elementID, attractions) {
+  var parentElement = document.getElementById(elementID);
+
+  attractions.forEach(function(attraction){
+    var optionElement = document.createElement('option')
+    var name = attraction.name
+
+    optionElement.append(name)
+    parentElement.append(optionElement)
+  })
+}
