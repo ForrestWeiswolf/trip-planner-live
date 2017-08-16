@@ -58,11 +58,17 @@ function populate(elementID, attractions) {
     newListItem.append(newButton);
 
     const marker = buildMarker(attractionType, coordinates[selectedOption])
+    marker._element.id = selectedOption
     marker.addTo(map);
   })
 })
 
-document.getElementById('itinerary').addEventListener('click', function(button) {
-  var parent = button.target.parentNode;
-  parent.parentNode.removeChild(parent);
+document.getElementById('itinerary').addEventListener('click', function(event) {
+  if (event.target.tagName === 'BUTTON'){
+    var parent = event.target.parentNode;
+
+    var marker = document.getElementById(parent.innerHTML.replace(/<.+/, '').replace('&amp;', '&'))
+    marker.remove()
+    parent.remove()
+  }
 })
