@@ -45,15 +45,15 @@ function populate(elementID, attractions) {
     var attractionID = document.getElementById(attraction + '-choices');
     var selectedOption = attractionID.options[attractionID.selectedIndex].value;
     var listElement = document.getElementById(attraction + '-list');
-    var newItem = document.createElement('li');
+    var newListItem = document.createElement('li');
 
     var newButton = document.createElement('button');
     newButton.classList.add('btn-danger', 'btn-circle', 'pull-right');
     newButton.append('x');
 
-    newItem.append(selectedOption);
-    listElement.append(newItem);
-    listElement.append(newButton);
+    newListItem.append(selectedOption);
+    listElement.append(newListItem);
+    newListItem.append(newButton);
   })
 })
 
