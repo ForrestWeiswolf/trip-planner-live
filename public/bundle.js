@@ -554,9 +554,8 @@ const map = new mapboxgl.Map({
   style: 'mapbox://styles/mapbox/streets-v10'
 });
 
-
 /*
- * Fetch data from API
+ * Fetch data from API and populate the select elements with options
  */
 
 fetch('/api')
@@ -580,6 +579,10 @@ function populate(elementID, attractions) {
     coordinates[attraction.name] = attraction.place.location
   })
 }
+
+/*
+ * Add buttons and their click listeners
+ */
 
 ['hotels', 'restaurants', 'activities'].forEach((attractionType) => {
   document.getElementById(attractionType + '-add').addEventListener('click', function() {
