@@ -28,23 +28,25 @@ fetch('/api')
     populate('activities-choices', data[2])
   })
 
+var coordinates = {}
+
 function populate(elementID, attractions) {
   var parentElement = document.getElementById(elementID);
 
   attractions.forEach(function(attraction) {
     var optionElement = document.createElement('option')
-    var name = attraction.name
 
-    optionElement.append(name)
+    optionElement.append(attraction.name)
     parentElement.append(optionElement)
+    coordinates[attraction.name] = attraction.place.location
   })
 }
 
-['hotels', 'restaurants', 'activities'].forEach((attraction) => {
-  document.getElementById(attraction + '-add').addEventListener('click', function() {
-    var attractionID = document.getElementById(attraction + '-choices');
-    var selectedOption = attractionID.options[attractionID.selectedIndex].value;
-    var listElement = document.getElementById(attraction + '-list');
+['hotels', 'restaurants', 'activities'].forEach((attractionType) => {
+  document.getElementById(attractionType + '-add').addEventListener('click', function() {
+    var typeID = document.getElementById(attractionType + '-choices');
+    var selectedOption = typeID.options[typeID.selectedIndex].value;
+    var listElement = document.getElementById(attractionType + '-list');
     var newListItem = document.createElement('li');
 
     var newButton = document.createElement('button');
@@ -54,11 +56,13 @@ function populate(elementID, attractions) {
     newListItem.append(selectedOption);
     listElement.append(newListItem);
     newListItem.append(newButton);
+
+    const marker = buildMarker(attractionType, coordinates[selectedOption])
+    marker.addTo(map);
   })
 })
 
 document.getElementById('itinerary').addEventListener('click', function(button) {
   var parent = button.target.parentNode;
-  console.log(parent);
   parent.parentNode.removeChild(parent);
 })
