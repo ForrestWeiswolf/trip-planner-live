@@ -40,7 +40,7 @@ function populate(elementID, attractions) {
   })
 }
 
-['hotels', 'restaurants', 'activities'].map((attraction) => {
+['hotels', 'restaurants', 'activities'].forEach((attraction) => {
   document.getElementById(attraction + '-add').addEventListener('click', function() {
     var attractionID = document.getElementById(attraction + '-choices');
     var selectedOption = attractionID.options[attractionID.selectedIndex].value;
