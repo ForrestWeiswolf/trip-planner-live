@@ -542,10 +542,12 @@ const buildMarker = __webpack_require__(4);
  * Instantiate the Map
  */
 
+const center = [-74.0, 40.731]
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiZm9ycmVzdHdlaXN3b2xmIiwiYSI6ImNqNjgzbzZidTBicXYzMnBsd2Vib3dyMDIifQ.QoJCtUmn8qbtM9iosPGlhA';
 const map = new mapboxgl.Map({
   container: 'map-canvas',
-  center: [-74.0, 40.731],
+  center: center,
   zoom: 12.5, // starting zoom
   pitch: 35,
   bearing: 20,
@@ -597,6 +599,8 @@ function populate(elementID, attractions) {
     const marker = buildMarker(attractionType, coordinates[selectedOption])
     marker._element.id = selectedOption
     marker.addTo(map);
+
+    map.flyTo({center: coordinates[selectedOption], zoom: 15})
   })
 })
 
@@ -605,8 +609,9 @@ document.getElementById('itinerary').addEventListener('click', function(event) {
     var parent = event.target.parentNode;
 
     var marker = document.getElementById(parent.innerHTML.replace(/<.+/, '').replace('&amp;', '&'))
-    marker.remove()
     parent.remove()
+
+    map.flyTo({center: center, zoom: 12.5})
   }
 })
 
