@@ -1,37 +1,37 @@
-const mapboxgl = require("mapbox-gl");
-const buildMarker = require("./marker");
+const mapboxgl = require('mapbox-gl');
+const buildMarker = require('./marker');
 
 /*
-  * Instantiate the Map
-  */
+ * Instantiate the Map
+ */
 
-mapboxgl.accessToken = "pk.eyJ1IjoiZm9ycmVzdHdlaXN3b2xmIiwiYSI6ImNqNjgzbzZidTBicXYzMnBsd2Vib3dyMDIifQ.QoJCtUmn8qbtM9iosPGlhA";
+mapboxgl.accessToken = 'pk.eyJ1IjoiZm9ycmVzdHdlaXN3b2xmIiwiYSI6ImNqNjgzbzZidTBicXYzMnBsd2Vib3dyMDIifQ.QoJCtUmn8qbtM9iosPGlhA';
 const map = new mapboxgl.Map({
-  container: "map-canvas",
+  container: 'map-canvas',
   center: [-74.0, 40.731],
   zoom: 12.5, // starting zoom
   pitch: 35,
   bearing: 20,
-  style: "mapbox://styles/mapbox/streets-v10"
+  style: 'mapbox://styles/mapbox/streets-v10'
 });
 
 
 /*
-  * Fetch data from API
-  */
+ * Fetch data from API
+ */
 
 fetch('/api')
-.then(result => result.json())
-.then(function(data) {
-  populate('hotels-choices', data[0])
-  populate('restaurants-choices', data[1])
-  populate('activities-choices', data[2])
-})
+  .then(result => result.json())
+  .then(function(data) {
+    populate('hotels-choices', data[0])
+    populate('restaurants-choices', data[1])
+    populate('activities-choices', data[2])
+  })
 
 function populate(elementID, attractions) {
   var parentElement = document.getElementById(elementID);
 
-  attractions.forEach(function(attraction){
+  attractions.forEach(function(attraction) {
     var optionElement = document.createElement('option')
     var name = attraction.name
 
@@ -40,15 +40,15 @@ function populate(elementID, attractions) {
   })
 }
 
-["hotels", "restaurants", "activities"].map((attraction) => {
-    document.getElementById(attraction+'-add').addEventListener('click',function(){
-    var attractionID = document.getElementById(attraction+'-choices');
+['hotels', 'restaurants', 'activities'].map((attraction) => {
+  document.getElementById(attraction + '-add').addEventListener('click', function() {
+    var attractionID = document.getElementById(attraction + '-choices');
     var selectedOption = attractionID.options[attractionID.selectedIndex].value;
-    var listElement = document.getElementById(attraction+'-list');
+    var listElement = document.getElementById(attraction + '-list');
     var newItem = document.createElement('li');
-    
+
     var newButton = document.createElement('button');
-    newButton.classList.add('btn-danger','btn-circle','pull-right');
+    newButton.classList.add('btn-danger', 'btn-circle', 'pull-right');
     newButton.append('x');
 
     newItem.append(selectedOption);
@@ -57,9 +57,8 @@ function populate(elementID, attractions) {
   })
 })
 
-document.getElementById('itinerary').addEventListener('click',function(button){
+document.getElementById('itinerary').addEventListener('click', function(button) {
   var parent = button.target.parentNode;
   console.log(parent);
   parent.parentNode.removeChild(parent);
 })
-
